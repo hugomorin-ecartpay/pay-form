@@ -65,13 +65,13 @@ const handleSubmit = async () => {
     const payLink = orderResponse.data.pay_link
     console.log('Orden creada con éxito. Redireccionando a:', payLink)
 
-    // --- 3: MOSTRAR RESULTADO Y ESPERAR ANTES DE REDIRECCIONAR ---
+    // 3: MOSTRAR RESULTADO Y ESPERAR ANTES DE REDIRECCIONAR
     payLinkResult.value = payLink // Guardamos el link para mostrarlo en el template
 
-    // Esperamos 5 segundos antes de redireccionar
+    // Esperamos 3 segundos antes de redireccionar
     setTimeout(() => {
       window.location.href = payLink
-    }, 5000) // 5000 milisegundos = 5 segundos
+    }, 3000)
   } catch (error) {
     console.error('Hubo un error en el proceso:', error.response?.data || error.message)
     alert('Hubo un error. Revisa la consola para ver los detalles.')
@@ -85,7 +85,7 @@ const handleSubmit = async () => {
   <div class="order-form">
     <div v-if="payLinkResult" class="success-message">
       <h2>¡Orden Creada con Éxito!</h2>
-      <p>Serás redirigido en 5 segundos.</p>
+      <p>Serás redirigido en 3 segundos.</p>
       <p class="pay-link-info">
         <strong>Link de Pago:</strong>
         <a :href="payLinkResult" target="_blank">{{ payLinkResult }}</a>
@@ -137,7 +137,6 @@ const handleSubmit = async () => {
 </template>
 
 <style scoped>
-/* Tus estilos se quedan igual */
 .order-form {
   max-width: 400px;
   margin: 2rem auto;
