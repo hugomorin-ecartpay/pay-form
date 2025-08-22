@@ -2,7 +2,6 @@
 import { ref } from 'vue'
 import axios from 'axios'
 
-// --- VARIABLES DE ESTADO ---
 // Datos del formulario
 const customerId = ref('657b928db4c08f6f66847b09')
 const currency = ref('MXN')
@@ -11,7 +10,6 @@ const itemName = ref('Brazalete de plata')
 const itemQuantity = ref(1)
 const itemPrice = ref(250.0)
 
-// Nuevas variables para controlar la UI
 const payLinkResult = ref(null) // Almacena el link para mostrarlo
 const isLoading = ref(false) // Bloquea el botón mientras se procesa
 
@@ -21,7 +19,7 @@ const handleSubmit = async () => {
   console.log('Iniciando proceso de creación de orden...')
 
   try {
-    // 1: OBTENER EL TOKEN DE AUTORIZACIÓN
+    // 1: OBTENER EL TOKEN
     console.log('Paso 1: Solicitando token de autorización...')
     const tokenResponse = await axios.post(
       'https://sandbox.ecartpay.com/api/authorizations/token',
@@ -65,10 +63,9 @@ const handleSubmit = async () => {
     const payLink = orderResponse.data.pay_link
     console.log('Orden creada con éxito. Redireccionando a:', payLink)
 
-    // 3: MOSTRAR RESULTADO Y ESPERAR ANTES DE REDIRECCIONAR
-    payLinkResult.value = payLink // Guardamos el link para mostrarlo en el template
+    // 3: MOSTRAR RESULTADO Y ESPERAR 3 SEGUNDOS ANTES DE REDIRECCIONAR
+    payLinkResult.value = payLink // Guarda el link para mostrarlo en el template
 
-    // Esperamos 3 segundos antes de redireccionar
     setTimeout(() => {
       window.location.href = payLink
     }, 3000)
