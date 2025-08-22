@@ -103,7 +103,7 @@ const handleSubmit = async () => {
       </div>
 
       <div class="form-group">
-        <label for="notify-url">URL de Notificación (Webhook)</label>
+        <label for="notify-url">URL de Notificación</label>
         <input id="notify-url" type="url" v-model="notifyUrl" />
       </div>
 
